@@ -1,5 +1,6 @@
-const App: React.FC = () => {
-  return <h1>Init project</h1>;
-};
+import { RouterProvider } from 'react-router-dom';
+import router from './routes';
+
+const App: React.FC = () => <RouterProvider router={router} />;
 
 export default App;
