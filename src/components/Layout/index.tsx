@@ -5,9 +5,9 @@ import './style.css';
 const Layout: React.FC<PropsWithChildren> = ({ children }) => (
   <>
     <Header />
-    <div className="layout">
+    <main className="layout">
       <div className="layout-container">{children}</div>
-    </div>
+    </main>
   </>
 );
 
