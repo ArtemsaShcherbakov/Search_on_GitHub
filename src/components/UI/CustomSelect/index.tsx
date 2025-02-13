@@ -9,19 +9,19 @@ interface IOption {
 interface ICustomSelectProps {
   name: string;
   optionsList: IOption[];
-  className?: string;
+  modifyStyle?: string;
   defaultValue?: string;
 }
 
 const CustomSelect: React.FC<ICustomSelectProps> = ({
   optionsList,
-  className,
+  modifyStyle,
   name,
   defaultValue,
 }) => (
   <select
     name={name}
-    className={`custom-select ${className}`}
+    className={`custom-select ${modifyStyle}`}
     defaultValue={defaultValue}
     aria-label={name}
   >
