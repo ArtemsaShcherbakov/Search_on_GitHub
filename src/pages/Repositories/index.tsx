@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import Layout from '../../components/Layout';
+import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
 import CustomInput from '../../components/UI/CustomInput';
 import { EventInputType } from '../../types';
 import './style.css';
+
+const mockRepositoriesFound = 100;
 
 const Repositories: React.FC = () => {
   const [search, setSearch] = useState<string>('');
@@ -22,6 +25,9 @@ const Repositories: React.FC = () => {
         name="search"
         onChange={handleInputSearch}
         modifyStyle="search-input"
+      />
+      <SortRepositoriesAndSearchResults
+        numberRepositoriesFound={mockRepositoriesFound}
       />
     </Layout>
   );
