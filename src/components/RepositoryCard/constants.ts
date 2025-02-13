@@ -17,14 +17,4 @@ export const ICONS_REPOSITORY_CARD = {
   },
 };
 
-export const MOCK_DATA_REPOSITORY = {
-  owner: {
-    avatar_url: 'https://avatars.githubusercontent.com/u/28943176?v=4',
-  },
-  html_url: 'https://github.com/VR-25/acc',
-  full_name: 'VR-25/acc',
-  stargazers_count: 1835,
-  forks: 108,
-};
-
 export const AVATAR_REPOSITORY_ALT = 'Avatar Repository';

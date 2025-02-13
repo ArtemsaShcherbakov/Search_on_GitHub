@@ -4,6 +4,11 @@
   font-weight: 400;
   color: #000000;
   background-color: #ffffff;
+
+  --container-max-width: 1200px;
+  --container-margin-lg: 60px;
+  --container-margin-md: 30px;
+  --container-margin-sm: 15px;
 }
 
 body {
