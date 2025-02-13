@@ -2,19 +2,24 @@ import Card from '../Card';
 import HeaderCard from './HeaderCard/inex';
 import ContentCard from './ContentCard';
 import FooterCard from './FooterCard';
-import { MOCK_DATA_REPOSITORY } from './constants';
+import { IRepository } from '../../interfaces';
 
-const RepositoryCard: React.FC = () => {
+interface IRepositoryCardProps {
+  repository: IRepository;
+}
+
+const RepositoryCard: React.FC<IRepositoryCardProps> = ({ repository }) => {
   return (
     <Card>
       <HeaderCard
-        avatarRepositoryPath={MOCK_DATA_REPOSITORY.owner.avatar_url}
-        numberOfForks={MOCK_DATA_REPOSITORY.forks}
-        numberOfStars={MOCK_DATA_REPOSITORY.stargazers_count}
+        avatarRepositoryPath={repository.owner.avatar_url}
+        numberOfForks={repository.forks}
+        numberOfStars={repository.stargazers_count}
       />
       <ContentCard
-        fullName={MOCK_DATA_REPOSITORY.full_name}
-        url={MOCK_DATA_REPOSITORY.html_url}
+        fullName={repository.full_name}
+        login={repository.owner.login}
+        url={repository.url}
       />
       <FooterCard />
     </Card>

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
-import RepositoryCard from '../../components/RepositoryCard';
+import ListRepositories from '../../components/ListRepositories';
 import CustomInput from '../../components/UI/CustomInput';
 import { EventInputType } from '../../types';
+import { MOCK_DATA_REPOSITORIES } from '../../constants';
 import './style.css';
 
 const mockRepositoriesFound = 100;
@@ -30,7 +31,7 @@ const Repositories: React.FC = () => {
       <SortRepositoriesAndSearchResults
         numberRepositoriesFound={mockRepositoriesFound}
       />
-      <RepositoryCard />
+      <ListRepositories repositories={MOCK_DATA_REPOSITORIES} />
     </Layout>
   );
 };

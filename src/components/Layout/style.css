@@ -7,6 +7,22 @@
 }
 
 .layout-container {
-  max-width: 1200px;
+  margin-left: var(--container-margin-lg);
+  margin-right: var(--container-margin-lg);
+  max-width: var(--container-max-width);
   width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .layout-container {
+    margin-left: var(--container-margin-md);
+    margin-right: var(--container-margin-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-container {
+    margin-left: var(--container-margin-sm);
+    margin-right: var(--container-margin-sm);
+  }
 }
