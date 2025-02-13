@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
+import RepositoryCard from '../../components/RepositoryCard';
 import CustomInput from '../../components/UI/CustomInput';
 import { EventInputType } from '../../types';
 import './style.css';
@@ -29,6 +30,7 @@ const Repositories: React.FC = () => {
       <SortRepositoriesAndSearchResults
         numberRepositoriesFound={mockRepositoriesFound}
       />
+      <RepositoryCard />
     </Layout>
   );
 };
