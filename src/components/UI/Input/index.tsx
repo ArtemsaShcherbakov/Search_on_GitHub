@@ -1,22 +1,23 @@
+import { FC } from 'react';
 import { EventInputType } from '../../../types';
 import './style.css';
 
-interface ICustomInput {
+interface IInputProps {
   type: string;
   name: string;
   value: string;
   placeholder: string;
-  modifyStyle?: string;
+  modifyViaClassName?: string;
   onChange: (event: EventInputType) => void;
 }
 
-const CustomInput: React.FC<ICustomInput> = ({
+const Input: FC<IInputProps> = ({
   type,
   name,
   value,
   placeholder,
   onChange,
-  modifyStyle,
+  modifyViaClassName,
 }) => (
   <input
     type={type}
@@ -24,8 +25,8 @@ const CustomInput: React.FC<ICustomInput> = ({
     placeholder={placeholder}
     value={value}
     onChange={onChange}
-    className={`custom-input ${modifyStyle}`}
+    className={`standart-input ${modifyViaClassName}`}
   />
 );
 
-export default CustomInput;
+export default Input;

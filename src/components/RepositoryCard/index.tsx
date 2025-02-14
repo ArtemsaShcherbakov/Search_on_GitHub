@@ -1,5 +1,5 @@
-import Card from '../Card';
-import HeaderCard from './HeaderCard/inex';
+import Card from '../UI/Card';
+import HeaderCard from './HeaderCard';
 import ContentCard from './ContentCard';
 import FooterCard from './FooterCard';
 import { IRepository } from '../../interfaces';
