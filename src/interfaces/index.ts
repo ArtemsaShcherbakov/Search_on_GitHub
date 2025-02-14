@@ -20,3 +20,8 @@ export interface IRepository {
   owner: IOwner;
   url: string;
 }
+
+export interface IFoundRepositoryData {
+  total_count: number;
+  items: IRepository[];
+}
