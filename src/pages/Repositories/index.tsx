@@ -1,21 +1,36 @@
-import { useState } from 'react';
+import { useState, useCallback, FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
 import ListRepositories from '../../components/ListRepositories';
 import CustomInput from '../../components/UI/CustomInput';
+import RepositoriesStore from '../../stores/RepositoriesStore';
+import throttle from '../../shared/utils/throttle';
+import notEmptyString from '../../shared/utils/not-empty-string';
+import { THROTTLE_DELAY } from '../../constants';
 import { EventInputType } from '../../types';
-import { MOCK_DATA_REPOSITORIES } from '../../constants';
 import './style.css';
 
-const mockRepositoriesFound = 100;
+const Repositories: FC = observer(() => {
+  const { repositories, totalCount, isLoading, searchRepository } =
+    RepositoriesStore;
 
-const Repositories: React.FC = () => {
   const [search, setSearch] = useState<string>('');
+
+  const isShowListRepositories = !!totalCount && !isLoading;
+
+  const throttledSearchRepository = useCallback(
+    throttle(searchRepository, THROTTLE_DELAY),
+    [],
+  );
 
   const handleInputSearch = (event: EventInputType) => {
     const valueInput = event.target.value;
-
     setSearch(valueInput);
+
+    if (notEmptyString(valueInput)) {
+      throttledSearchRepository(valueInput);
+    }
   };
 
   return (
@@ -28,12 +43,13 @@ const Repositories: React.FC = () => {
         onChange={handleInputSearch}
         modifyStyle="search-input"
       />
-      <SortRepositoriesAndSearchResults
-        numberRepositoriesFound={mockRepositoriesFound}
-      />
-      <ListRepositories repositories={MOCK_DATA_REPOSITORIES} />
+      <SortRepositoriesAndSearchResults numberRepositoriesFound={totalCount} />
+
+      {isShowListRepositories && (
+        <ListRepositories repositories={repositories} />
+      )}
     </Layout>
   );
-};
+});
 
 export default Repositories;
