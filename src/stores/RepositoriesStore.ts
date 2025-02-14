@@ -14,13 +14,19 @@ class RepositoriesStore {
     makeAutoObservable(this);
   }
 
-  searchRepository = async (search: string) => {
+  searchRepository = async (
+    search: string,
+    page: number,
+    countOfRepositories: number,
+  ) => {
     try {
       this.isLoading = true;
 
-      const foundRepositoryData = await getFoundRepositories(search);
-
-      console.log('mobX', foundRepositoryData);
+      const foundRepositoryData = await getFoundRepositories(
+        search,
+        page,
+        countOfRepositories,
+      );
 
       runInAction(() => {
         this.repositories = foundRepositoryData.data.items;

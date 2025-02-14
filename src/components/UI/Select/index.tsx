@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import './style.css';
 
 interface IOption {
@@ -6,22 +7,22 @@ interface IOption {
   textOption?: string;
 }
 
-interface ICustomSelectProps {
+interface ISelectProps {
   name: string;
   optionsList: IOption[];
-  modifyStyle?: string;
+  modifyViaClassName?: string;
   defaultValue?: string;
 }
 
-const CustomSelect: React.FC<ICustomSelectProps> = ({
+const Select: FC<ISelectProps> = ({
   optionsList,
-  modifyStyle,
+  modifyViaClassName,
   name,
   defaultValue,
 }) => (
   <select
     name={name}
-    className={`custom-select ${modifyStyle}`}
+    className={`standart-select ${modifyViaClassName}`}
     defaultValue={defaultValue}
     aria-label={name}
   >
@@ -33,4 +34,4 @@ const CustomSelect: React.FC<ICustomSelectProps> = ({
   </select>
 );
 
-export default CustomSelect;
+export default Select;

@@ -7,12 +7,3 @@
   display: flex;
   gap: 16px;
 }
-
-.footer-card-controller__icon-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border-width: 1px;
-  border: 1px solid #3a3a3a1f;
-  background: #ffffff;
-}
