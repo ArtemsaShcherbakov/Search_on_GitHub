@@ -20,7 +20,7 @@ const Button: FC<PropsWithChildren<IButtonProps>> = ({
     aria-label={ariaLabel || textButton}
     disabled={disabled}
   >
-    {textButton && textButton}
+    {textButton}
     {children}
   </button>
 );
