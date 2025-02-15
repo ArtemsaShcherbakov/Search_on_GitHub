@@ -1,5 +1,6 @@
 export enum ROUTES_LIST {
   repositories = '/',
+  favorites = '/favorites',
 }
 
 export enum ERRORS_API {

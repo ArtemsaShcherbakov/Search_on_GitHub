@@ -1,29 +1,29 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import Button from '../Button';
 import IButtonProps from '../interface';
 import './style.css';
 
 interface IIconButton extends Omit<IButtonProps, 'textButton'> {}
 
-const IconButton: FC<IIconButton> = ({
+const IconButton: FC<PropsWithChildren<IIconButton>> = ({
   type,
   nameButton,
   modifyViaClassNameButton,
-  modifyViaClassNameIcon,
-  icon,
+  ariaLabel,
   handleOnClick,
   disabled,
+  children,
 }) => (
   <Button
     type={type}
     nameButton={nameButton}
-    icon={icon}
     modifyViaClassNameButton={`icon-button ${modifyViaClassNameButton}`}
-    modifyViaClassNameIcon={modifyViaClassNameIcon}
-    aria-label={icon?.alt}
+    aria-label={ariaLabel}
     handleOnClick={handleOnClick}
     disabled={disabled}
-  />
+  >
+    {children}
+  </Button>
 );
 
 export default IconButton;
