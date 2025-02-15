@@ -6,6 +6,7 @@ import Input from '../../components/UI/Input';
 import Pagination from '../../components/UI/Pagination';
 import Loader from '../../components/UI/Loader';
 import RepositoriesStore from '../../stores/RepositoriesStore';
+import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
 import throttle from '../../shared/utils/throttle';
 import notEmptyString from '../../shared/utils/not-empty-string';
 import {
@@ -24,6 +25,8 @@ const ListRepositories = lazy(
 const Repositories: FC = observer(() => {
   const { repositories, totalCount, isLoading, searchRepository } =
     RepositoriesStore;
+
+  // const { favorites, addFavoriteRepository } = FavoritesRepositoriesStore;
 
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(INIT_SATATE_PAGE);
@@ -60,6 +63,10 @@ const Repositories: FC = observer(() => {
       setPage(INIT_SATATE_PAGE);
     }
   };
+
+  // const handleAddFavoriteRepository = () => {
+  //   addFavoriteRepository()
+  // }
 
   const handleNextPage = () =>
     setPage(prev => Math.min(prev + PAGE_SWITCH_STEP, countOfPages));

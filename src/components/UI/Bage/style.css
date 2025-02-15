@@ -1,0 +1,24 @@
+.bage-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.bage-container-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  top: -10px;
+  right: -10px;
+  border-radius: 4px;
+  padding: 2px 4px;
+  background: #d44333;
+}
+
+.bage-container-wrapper__content {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 10.8px;
+  color: #ffffff;
+}
