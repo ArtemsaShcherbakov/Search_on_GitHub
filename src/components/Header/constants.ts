@@ -12,3 +12,5 @@ export const ICONS = {
     alt: 'Search',
   },
 };
+
+export const TITLE = 'GitHubSearch';

@@ -13,7 +13,11 @@ export const ICONS_REPOSITORY_CARD = {
   },
   heart: {
     path: './src/assets/icons/heart_simple.svg',
-    alt: 'Heart',
+    alt: 'Remove from favorites',
+  },
+  favoriteRepository: {
+    path: './src/assets/icons/favorite_heart.svg',
+    alt: 'Add to favorites',
   },
 };
 
