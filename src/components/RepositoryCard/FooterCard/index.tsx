@@ -19,12 +19,15 @@ const FooterCard: FC<IFooterCardProps> = ({
   return (
     <footer className="footer-card" role="contentinfo">
       <div className="footer-card-controller">
-        <IconButton
-          type="button"
-          handleOnClick={handleAddFavoriteRepository}
-          icon={favoritIcon}
-        />
-        <IconButton type="button" icon={ICONS_REPOSITORY_CARD.copy} />
+        <IconButton type="button" handleOnClick={handleAddFavoriteRepository}>
+          <img src={favoritIcon.path} alt={favoritIcon.alt} />
+        </IconButton>
+        <IconButton type="button">
+          <img
+            src={ICONS_REPOSITORY_CARD.copy.path}
+            alt={ICONS_REPOSITORY_CARD.copy.alt}
+          />
+        </IconButton>
       </div>
       <Button type="button" textButton="Подробнее" />
     </footer>

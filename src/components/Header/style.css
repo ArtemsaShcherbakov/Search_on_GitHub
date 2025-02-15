@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: 11px;
+  cursor: pointer;
 }
 
 .header-container-logo__text {
@@ -44,6 +45,13 @@
 .header-container-profile__icon-favorites {
   width: 15px;
   height: 12.5px;
+}
+
+.header-container-profile__button-favorites {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #ffffff1f;
 }
 
 .header-container-profile__icon-avatar {
