@@ -1,10 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import Repositories from './pages/Repositories/index.tsx';
 import Favorites from './pages/Favorites/index.tsx';
 import ProfileRepository from './pages/ProfileRepository/index.tsx';
 import { ROUTES_LIST } from './constants.ts';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: ROUTES_LIST.repositories,
     element: <Repositories />,

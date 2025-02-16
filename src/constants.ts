@@ -22,41 +22,55 @@ export const PAGE_SWITCH_STEP = 1;
 
 export const INIT_SATATE_PAGE = 1;
 
+const BASE_PATH = '/Search_on_GitHub';
+
 export const ICONS = {
   star: {
-    path: '/assets/icons/star.svg',
+    path: `${BASE_PATH}/assets/icons/star.svg`,
     alt: 'Stars GitHub',
   },
   branches: {
-    path: '/assets/icons/branches.svg',
+    path: `${BASE_PATH}/assets/icons/branches.svg`,
     alt: 'Branches GitHub',
   },
   copy: {
-    path: '/assets/icons/link_copy.svg',
+    path: `${BASE_PATH}/assets/icons/link_copy.svg`,
     alt: 'Link Copy',
   },
   heart: {
-    path: '/assets/icons/heart_simple.svg',
+    path: `${BASE_PATH}/assets/icons/heart_simple.svg`,
     alt: 'Remove from favorites',
   },
   favoriteRepository: {
-    path: '/assets/icons/favorite_heart.svg',
+    path: `${BASE_PATH}/assets/icons/favorite_heart.svg`,
     alt: 'Add to favorites',
   },
   archived: {
-    path: '/assets/icons/archived.svg',
-    alt: 'Add to favorites',
+    path: `${BASE_PATH}/assets/icons/archived.svg`,
+    alt: 'Archived',
   },
   console: {
-    path: '/assets/icons/console.svg',
-    alt: 'Add to favorites',
+    path: `${BASE_PATH}/assets/icons/console.svg`,
+    alt: 'Console',
   },
   folder: {
-    path: '/assets/icons/folder.svg',
-    alt: 'Add to favorites',
+    path: `${BASE_PATH}/assets/icons/folder.svg`,
+    alt: 'Folder',
   },
   pen: {
-    path: '/assets/icons/pen.svg',
-    alt: 'Add to favorites',
+    path: `${BASE_PATH}/assets/icons/pen.svg`,
+    alt: 'Pen',
+  },
+  avatar: {
+    path: `${BASE_PATH}/assets/icons/avatar.svg`,
+    alt: 'User Avatar',
+  },
+  magnifier: {
+    path: `${BASE_PATH}/assets/icons/magnifier.svg`,
+    alt: 'Search',
+  },
+  arrow_navigation: {
+    path: `${BASE_PATH}/assets/icons/arrow-navigate.svg`,
+    alt: 'Arrow Navigat',
   },
 };

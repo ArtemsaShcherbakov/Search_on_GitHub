@@ -1,5 +1,6 @@
 import Avatar from '../../UI/Avatar';
-import { ICONS_REPOSITORY_CARD, AVATAR_REPOSITORY_ALT } from '../constants';
+import { AVATAR_REPOSITORY_ALT } from '../constants';
+import { ICONS } from '../../../constants';
 import './style.css';
 
 interface HeaderCardProps {
@@ -21,19 +22,13 @@ const HeaderCard: React.FC<HeaderCardProps> = ({
     />
     <div className="header-card-statistics">
       <div className="header-card-statistics-container">
-        <img
-          src={ICONS_REPOSITORY_CARD.star.path}
-          alt={ICONS_REPOSITORY_CARD.star.alt}
-        />
+        <img src={ICONS.star.path} alt={ICONS.star.alt} />
         <p className="header-card-statistics-container__number">
           {numberOfStars}
         </p>
       </div>
       <div className="header-card-statistics-container">
-        <img
-          src={ICONS_REPOSITORY_CARD.branches.path}
-          alt={ICONS_REPOSITORY_CARD.branches.alt}
-        />
+        <img src={ICONS.branches.path} alt={ICONS.branches.alt} />
         <p className="header-card-statistics-container__number">
           {numberOfForks}
         </p>
