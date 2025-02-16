@@ -1,9 +1,9 @@
 export const BASE_PATH = '/Search_on_GitHub';
 
 export enum ROUTES_LIST {
-  repositories = `${BASE_PATH}/repositories`,
-  favorites = `${BASE_PATH}/favorites`,
-  repository = `${BASE_PATH}/repositories/:owner/:repo`,
+  repositories = 'repositories',
+  favorites = 'favorites',
+  repository = 'repositories/:owner/:repo',
 }
 
 export enum ERRORS_API {
