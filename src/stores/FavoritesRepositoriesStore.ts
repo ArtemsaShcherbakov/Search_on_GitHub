@@ -3,18 +3,23 @@ import {
   loadFavorites,
   saveFavorites,
 } from '../shared/helpers/interaction-local-storage';
+import getSortRepositories from '../shared/helpers/get-sort-repositories';
 import { IRepository } from '../interfaces';
+import { SortOptionType } from '../types';
 
 class FavoritesRepositoriesStore {
   favorites: IRepository[] = [];
+  originalFavorites: IRepository[] = [];
 
   constructor() {
     makeAutoObservable(this, {
+      sortRepositories: action,
       findRepositoryById: computed,
       addFavoriteRepository: action,
       deleteFavoritRepositoryById: action,
     });
     this.favorites = loadFavorites();
+    this.originalFavorites = [...this.favorites];
   }
 
   addFavoriteRepository = (repository: IRepository) => {
@@ -43,6 +48,14 @@ class FavoritesRepositoriesStore {
     return (repositoryId: string) =>
       this.favorites.find(repository => repository.id === repositoryId);
   }
+
+  sortRepositories = (optionSort: SortOptionType) => {
+    this.favorites = getSortRepositories(
+      this.favorites,
+      this.originalFavorites,
+      optionSort,
+    );
+  };
 }
 
 export default new FavoritesRepositoriesStore();

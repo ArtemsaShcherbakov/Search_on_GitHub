@@ -8,7 +8,7 @@ import { NavigateButton } from '../../components/UI/Buttons';
 import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
 
 const Favorites: FC = observer(() => {
-  const { favorites } = FavoritesRepositoriesStore;
+  const { favorites, sortRepositories } = FavoritesRepositoriesStore;
   const navigate = useNavigate();
 
   const countOfFavoritsRepositories = favorites.length;
@@ -24,6 +24,7 @@ const Favorites: FC = observer(() => {
       />
       <SortRepositoriesAndSearchResults
         resultText={`Favorites: ${countOfFavoritsRepositories}`}
+        sortRepositories={sortRepositories}
       />
       <ListRepositories repositories={favorites} />
     </Layout>
