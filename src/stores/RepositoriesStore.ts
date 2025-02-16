@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { getFoundRepositories, getOneRepository } from '../services';
 import getSortRepositories from '../shared/helpers/get-sort-repositories';
 import { ERRORS_API } from '../constants';
-import { IRepository, IParamsForGetRepository } from '../interfaces';
+import { IRepository, IParamsForGetRepository, IError } from '../interfaces';
 import { SortOptionType } from '../types';
 
 class RepositoriesStore {
@@ -12,7 +12,10 @@ class RepositoriesStore {
   originalRepositories: IRepository[] = [];
   totalCount: number = 0;
   isLoading: boolean = false;
-  errorMessage: string = '';
+  error: IError = {
+    isError: false,
+    errorMessage: '',
+  };
 
   constructor() {
     makeAutoObservable(this);
@@ -23,6 +26,7 @@ class RepositoriesStore {
     search: string,
     page: number,
     countOfRepositories: number,
+    optionSort: SortOptionType,
   ) => {
     try {
       this.isLoading = true;
@@ -36,13 +40,20 @@ class RepositoriesStore {
       runInAction(() => {
         this.repositories = foundRepositoryData.data.items;
         this.totalCount = foundRepositoryData.data.total_count;
+        this.originalRepositories = [...foundRepositoryData.data.items];
         this.isLoading = false;
+        this.error.isError = false;
+        this.error.errorMessage = '';
       });
+
+      this.sortRepositories(optionSort);
     } catch (error) {
       runInAction(() => {
         this.isLoading = false;
+        this.error.isError = true;
+
         const axiosError = error as AxiosError<{ error_message: string }>;
-        this.errorMessage = axiosError.message || ERRORS_API.unknownError;
+        this.error.errorMessage = axiosError.message || ERRORS_API.unknownError;
       });
     }
   };
@@ -58,12 +69,16 @@ class RepositoriesStore {
       runInAction(() => {
         this.currentRepository = foundRepository.data;
         this.isLoading = false;
+        this.error.isError = false;
+        this.error.errorMessage = '';
       });
     } catch (error) {
       runInAction(() => {
         this.isLoading = false;
+        this.error.isError = true;
+
         const axiosError = error as AxiosError<{ error_message: string }>;
-        this.errorMessage = axiosError.message || ERRORS_API.unknownError;
+        this.error.errorMessage = axiosError.message || ERRORS_API.unknownError;
       });
     }
   };

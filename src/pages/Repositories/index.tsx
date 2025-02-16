@@ -1,4 +1,12 @@
-import { useState, useEffect, useCallback, FC, Suspense, lazy } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  FC,
+  Suspense,
+  lazy,
+  useMemo,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
@@ -14,7 +22,7 @@ import {
   PAGE_SWITCH_STEP,
   INIT_SATATE_PAGE,
 } from '../../constants';
-import { EventInputType } from '../../types';
+import { EventInputType, EventSelectType, SortOptionType } from '../../types';
 import './style.css';
 
 const ListRepositories = lazy(
@@ -26,51 +34,73 @@ const Repositories: FC = observer(() => {
     repositories,
     totalCount,
     isLoading,
+    error,
     searchRepositories,
     sortRepositories,
   } = RepositoriesStore;
 
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(INIT_SATATE_PAGE);
+  const [optionSort, setOptionSort] = useState<SortOptionType>('none');
 
   const countOfPages: number = totalCount
     ? Math.ceil(totalCount / SIZE_PAGINATION_API)
     : 0;
-  const isShowPagination: boolean = countOfPages > 1;
-  const isShowListRepositories: boolean = totalCount > 0 && !isLoading;
+  const isShowPagination: boolean = countOfPages > 1 && !error.isError;
+  const isShowListRepositories: boolean =
+    totalCount > 0 && !isLoading && !error.isError;
 
-  const throttledSearchRepository = useCallback(
-    throttle(searchRepositories, THROTTLE_DELAY),
+  const throttledSearchRepository = useMemo(
+    () => throttle(searchRepositories, THROTTLE_DELAY),
     [],
   );
 
   useEffect(() => {
     if (notEmptyString(search)) {
-      throttledSearchRepository(search, page, SIZE_PAGINATION_API);
+      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
     }
-  }, [page, setPage]);
+  }, [page, search]);
 
-  const handleInputSearch = (event: EventInputType) => {
-    const valueInput = event.target.value;
+  useEffect(() => {
+    sortRepositories(optionSort);
+  }, [optionSort]);
 
-    setSearch(valueInput);
+  const handleInputSearch = useCallback(
+    (event: EventInputType) => {
+      const valueInput = event.target.value;
 
-    if (notEmptyString(valueInput)) {
-      throttledSearchRepository(
-        valueInput,
-        INIT_SATATE_PAGE,
-        SIZE_PAGINATION_API,
-      );
-
+      setSearch(valueInput);
       setPage(INIT_SATATE_PAGE);
-    }
+
+      if (notEmptyString(valueInput)) {
+        throttledSearchRepository(
+          valueInput,
+          INIT_SATATE_PAGE,
+          SIZE_PAGINATION_API,
+          optionSort,
+        );
+      }
+    },
+    [throttledSearchRepository],
+  );
+
+  const handleSelectForSort = (event: EventSelectType) => {
+    const value = event.target.value as SortOptionType;
+
+    setOptionSort(value);
+
+    sortRepositories(value);
   };
 
-  const handleNextPage = () =>
-    setPage(prev => Math.min(prev + PAGE_SWITCH_STEP, countOfPages));
+  const handleNextPage = useCallback(
+    () => setPage(prev => Math.min(prev + PAGE_SWITCH_STEP, countOfPages)),
+    [countOfPages],
+  );
 
-  const handlePrevPage = () =>
-    setPage(prev => Math.max(prev - PAGE_SWITCH_STEP, INIT_SATATE_PAGE));
+  const handlePrevPage = useCallback(
+    () => setPage(prev => Math.max(prev - PAGE_SWITCH_STEP, INIT_SATATE_PAGE)),
+    [],
+  );
 
   return (
     <Layout>
@@ -84,7 +114,7 @@ const Repositories: FC = observer(() => {
       />
       <SortRepositoriesAndSearchResults
         resultText={`Result: ${totalCount} repositories`}
-        sortRepositories={sortRepositories}
+        sortRepositories={handleSelectForSort}
       />
       {isLoading && <Loader />}
       {isShowListRepositories && (
@@ -100,6 +130,7 @@ const Repositories: FC = observer(() => {
           hanldePrevData={handlePrevPage}
         />
       )}
+      {error.isError && <h3>{error.errorMessage}</h3>}
     </Layout>
   );
 });

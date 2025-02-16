@@ -6,7 +6,8 @@
   border-radius: 12px;
   appearance: none;
 
-  background: url('../../../assets/icons/arrow-bottom.svg') no-repeat right;
+  background: url('../../../../public/assets/icons/arrow-bottom.svg') no-repeat
+    right;
   background-position-x: calc(100% - 25px);
   background-color: #ffffff;
 }
