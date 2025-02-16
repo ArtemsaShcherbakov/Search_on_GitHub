@@ -44,8 +44,6 @@ class RepositoriesStore {
         const axiosError = error as AxiosError<{ error_message: string }>;
         this.errorMessage = axiosError.message || ERRORS_API.unknownError;
       });
-
-      console.error(error);
     }
   };
 
@@ -67,8 +65,6 @@ class RepositoriesStore {
         const axiosError = error as AxiosError<{ error_message: string }>;
         this.errorMessage = axiosError.message || ERRORS_API.unknownError;
       });
-
-      console.error(error);
     }
   };
 
