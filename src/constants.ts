@@ -22,7 +22,7 @@ export const PAGE_SWITCH_STEP = 1;
 
 export const INIT_SATATE_PAGE = 1;
 
-const BASE_PATH = '/Search_on_GitHub';
+export const BASE_PATH = '/Search_on_GitHub';
 
 export const ICONS = {
   star: {

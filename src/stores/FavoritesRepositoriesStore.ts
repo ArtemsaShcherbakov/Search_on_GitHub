@@ -36,7 +36,7 @@ class FavoritesRepositoriesStore {
     saveFavorites(this.favorites);
   };
 
-  deleteFavoritRepositoryById = (repositoryId: string) => {
+  deleteFavoritRepositoryById = (repositoryId: number) => {
     this.favorites = this.favorites.filter(
       repository => repository.id !== repositoryId,
     );
@@ -45,7 +45,7 @@ class FavoritesRepositoriesStore {
   };
 
   get findRepositoryById() {
-    return (repositoryId: string) =>
+    return (repositoryId: number) =>
       this.favorites.find(repository => repository.id === repositoryId);
   }
 
