@@ -1,7 +1,7 @@
 export enum ROUTES_LIST {
-  repositories = 'repositories',
-  favorites = 'favorites',
-  repository = 'repositories/:owner/:repo',
+  repositories = '/repositories',
+  favorites = '/favorites',
+  repository = '/repositories/:owner/:repo',
 }
 
 export enum ERRORS_API {
