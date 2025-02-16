@@ -1,3 +1,4 @@
+import Avatar from '../../UI/Avatar';
 import { ICONS_REPOSITORY_CARD, AVATAR_REPOSITORY_ALT } from '../constants';
 import './style.css';
 
@@ -13,9 +14,9 @@ const HeaderCard: React.FC<HeaderCardProps> = ({
   numberOfStars,
 }) => (
   <header className="header-card">
-    <img
-      className="header-card__avatar"
-      src={avatarRepositoryPath}
+    <Avatar
+      modifyViaClassNameBage="avatar--small"
+      path={avatarRepositoryPath}
       alt={AVATAR_REPOSITORY_ALT}
     />
     <div className="header-card-statistics">

@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { AxiosError } from 'axios';
-import { getFoundRepositories } from '../services';
+import { getFoundRepositories, getOneRepository } from '../services';
 import { ERRORS_API } from '../constants';
-import { IRepository } from '../interfaces';
+import { IRepository, IParamsForGetRepository } from '../interfaces';
 
 class RepositoriesStore {
   repositories: IRepository[] = [];
+  currentRepository: IRepository | null = null;
   totalCount: number = 0;
   isLoading: boolean = false;
   errorMessage: string = '';
@@ -14,7 +15,7 @@ class RepositoriesStore {
     makeAutoObservable(this);
   }
 
-  searchRepository = async (
+  searchRepositories = async (
     search: string,
     page: number,
     countOfRepositories: number,
@@ -31,6 +32,29 @@ class RepositoriesStore {
       runInAction(() => {
         this.repositories = foundRepositoryData.data.items;
         this.totalCount = foundRepositoryData.data.total_count;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.isLoading = false;
+        const axiosError = error as AxiosError<{ error_message: string }>;
+        this.errorMessage = axiosError.message || ERRORS_API.unknownError;
+      });
+
+      console.error(error);
+    }
+  };
+
+  getRepositoryByNameOwnerAndRepository = async (
+    params: IParamsForGetRepository,
+  ) => {
+    try {
+      this.isLoading = true;
+
+      const foundRepository = await getOneRepository(params);
+
+      runInAction(() => {
+        this.currentRepository = foundRepository.data;
         this.isLoading = false;
       });
     } catch (error) {

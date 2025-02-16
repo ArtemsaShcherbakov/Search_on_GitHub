@@ -22,7 +22,7 @@ const ListRepositories = lazy(
 );
 
 const Repositories: FC = observer(() => {
-  const { repositories, totalCount, isLoading, searchRepository } =
+  const { repositories, totalCount, isLoading, searchRepositories } =
     RepositoriesStore;
 
   const [search, setSearch] = useState<string>('');
@@ -35,7 +35,7 @@ const Repositories: FC = observer(() => {
   const isShowListRepositories: boolean = totalCount > 0 && !isLoading;
 
   const throttledSearchRepository = useCallback(
-    throttle(searchRepository, THROTTLE_DELAY),
+    throttle(searchRepositories, THROTTLE_DELAY),
     [],
   );
 
@@ -43,7 +43,7 @@ const Repositories: FC = observer(() => {
     if (notEmptyString(search)) {
       throttledSearchRepository(search, page, SIZE_PAGINATION_API);
     }
-  }, [page]);
+  }, [page, setPage]);
 
   const handleInputSearch = (event: EventInputType) => {
     const valueInput = event.target.value;
@@ -60,10 +60,6 @@ const Repositories: FC = observer(() => {
       setPage(INIT_SATATE_PAGE);
     }
   };
-
-  // const handleAddFavoriteRepository = () => {
-  //   addFavoriteRepository()
-  // }
 
   const handleNextPage = () =>
     setPage(prev => Math.min(prev + PAGE_SWITCH_STEP, countOfPages));
