@@ -1,7 +1,7 @@
 export enum ROUTES_LIST {
-  repositories = '/repositories',
-  favorites = '/favorites',
-  repository = '/repositories/:owner/:repo',
+  repositories = 'repositories',
+  favorites = 'favorites',
+  repository = 'repositories/:owner/:repo',
 }
 
 export enum ERRORS_API {
@@ -22,7 +22,7 @@ export const PAGE_SWITCH_STEP = 1;
 
 export const INIT_SATATE_PAGE = 1;
 
-export const BASE_PATH = '/Search_on_GitHub';
+export const BASE_PATH = 'Search_on_GitHub';
 
 export const ICONS = {
   star: {
