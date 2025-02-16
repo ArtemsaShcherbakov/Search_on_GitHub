@@ -1,0 +1,77 @@
+.card-repo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-repo-header {
+  display: flex;
+  gap: 24px;
+}
+
+.card-repo-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-repo-header-text__tite {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 27.6px;
+  color: #3a3a3a;
+}
+
+.card-repo-header-text__description {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #3a3a3a;
+}
+
+.card-repo-statistics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.card-repo-statistics-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+  max-height: 81px;
+  border-radius: 20px;
+  padding: 16px;
+  background: #3a3a3a0a;
+}
+
+.card-repo-statistics-container__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3a3a3a14;
+}
+
+.card-repo-statistics-container-data {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-repo-statistics-container-data__value {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #3a3a3a;
+}
+
+.card-repo-statistics-container-data__description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.1px;
+  color: #84868c;
+}

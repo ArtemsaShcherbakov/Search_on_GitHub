@@ -10,6 +10,7 @@ export interface IOwner {
 
 export interface IRepository {
   id: string;
+  name: string;
   full_name: string;
   language: string;
   forks: number;
@@ -18,10 +19,17 @@ export interface IRepository {
   created_at: string;
   updated_at: string;
   owner: IOwner;
-  url: string;
+  description: string;
+  html_url: string;
 }
 
 export interface IFoundRepositoryData {
   total_count: number;
   items: IRepository[];
+}
+
+export interface IParamsForGetRepository {
+  owner: string | undefined;
+  repo: string | undefined;
+  [key: string]: string | undefined;
 }

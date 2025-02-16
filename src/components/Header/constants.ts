@@ -1,14 +1,14 @@
 export const ICONS = {
   heart: {
-    path: './src/assets/icons/heart.svg',
+    path: '/assets/icons/heart.svg',
     alt: 'Favorites',
   },
   avatar: {
-    path: './src/assets/icons/avatar.svg',
+    path: '/assets/icons/avatar.svg',
     alt: 'User Avatar',
   },
   magnifier: {
-    path: './src/assets/icons/magnifier.svg',
+    path: '/assets/icons/magnifier.svg',
     alt: 'Search',
   },
 };

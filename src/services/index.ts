@@ -1,6 +1,7 @@
 import { get } from '../http';
 import { AxiosResponse } from 'axios';
-import { IFoundRepositoryData } from '../interfaces';
+import { IFoundRepositoryData, IRepository } from '../interfaces';
+import { IParamsForGetRepository } from '../interfaces';
 
 export const getFoundRepositories = (
   desiredRepository: string,
@@ -14,3 +15,9 @@ export const getFoundRepositories = (
       per_page: countOfRepositories,
     },
   });
+
+export const getOneRepository = ({
+  owner,
+  repo,
+}: IParamsForGetRepository): Promise<AxiosResponse<IRepository>> =>
+  get(`repos/${owner}/${repo}`);

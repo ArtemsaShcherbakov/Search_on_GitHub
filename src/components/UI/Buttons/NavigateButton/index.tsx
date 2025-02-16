@@ -4,7 +4,7 @@ import IButtonProps from '../interface';
 import './style.css';
 
 const ARROW_NAVIGATE_ICON = {
-  path: './src/assets/icons/arrow-navigate.svg',
+  path: '/assets/icons/arrow-navigate.svg',
   alt: 'Arrow Navigat',
 };
 
