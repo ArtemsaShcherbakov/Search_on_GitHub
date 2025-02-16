@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '../UI/Buttons';
 import Bage from '../UI/Bage';
 import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
-import { ICONS, TITLE } from './constants';
+import { ICONS } from '../../constants';
 import { ROUTES_LIST } from '../../constants';
 import './style.css';
 
@@ -34,7 +34,7 @@ const Header: FC = observer(() => {
             src={ICONS.magnifier.path}
             alt={ICONS.magnifier.alt}
           />
-          <h1 className="header-container-logo__text">{TITLE}</h1>
+          <h1 className="header-container-logo__text">GitHubSearch</h1>
         </div>
         <div className="header-container-profile">
           <IconButton

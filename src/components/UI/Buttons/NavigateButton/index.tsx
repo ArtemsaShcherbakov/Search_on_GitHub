@@ -1,12 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 import Button from '../Button';
+import { ICONS } from '../../../../constants';
 import IButtonProps from '../interface';
 import './style.css';
-
-const ARROW_NAVIGATE_ICON = {
-  path: '/assets/icons/arrow-navigate.svg',
-  alt: 'Arrow Navigat',
-};
 
 interface INavigateButtonProps extends IButtonProps {}
 
@@ -30,7 +26,7 @@ const NavigateButton: FC<PropsWithChildren<INavigateButtonProps>> = ({
     {children ? (
       children
     ) : (
-      <img src={ARROW_NAVIGATE_ICON.path} alt={ARROW_NAVIGATE_ICON.alt} />
+      <img src={ICONS.arrow_navigation.path} alt={ICONS.arrow_navigation.alt} />
     )}
   </Button>
 );
