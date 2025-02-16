@@ -9,3 +9,7 @@
   border: 1px solid #3a3a3a1f;
   background: #ffffff;
 }
+
+.icon-button:hover {
+  background: #e3dada;
+}

@@ -14,3 +14,12 @@
   color: #ffffff;
   white-space: nowrap;
 }
+
+.standart-button:hover {
+  background: #e47f73;
+}
+
+.standart-button:disabled {
+  cursor: default;
+  background: #ccc;
+}

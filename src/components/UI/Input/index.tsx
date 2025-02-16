@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { EventInputType } from '../../../types';
+import { EventInputType, InputKeyboardEventType } from '../../../types';
 import './style.css';
 
 interface IInputProps {
@@ -9,6 +9,7 @@ interface IInputProps {
   placeholder: string;
   modifyViaClassName?: string;
   onChange: (event: EventInputType) => void;
+  onSubmit?: () => void;
 }
 
 const Input: FC<IInputProps> = ({
@@ -17,16 +18,30 @@ const Input: FC<IInputProps> = ({
   value,
   placeholder,
   onChange,
+  onSubmit,
   modifyViaClassName,
-}) => (
-  <input
-    type={type}
-    name={name}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    className={`standart-input ${modifyViaClassName}`}
-  />
-);
+}) => {
+  const handleKeyDown = (event: InputKeyboardEventType) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      if (onSubmit) {
+        onSubmit();
+      }
+    }
+  };
+
+  return (
+    <input
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      onKeyDown={handleKeyDown}
+      className={`standart-input ${modifyViaClassName}`}
+    />
+  );
+};
 
 export default Input;
