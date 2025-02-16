@@ -14,7 +14,7 @@ export const OPTIONS_FOR_SORTING_REPOSITORIES = [
   { value: 'alphabetical', textOption: 'Alphabetical sorting' },
 ];
 
-export const THROTTLE_DELAY = 800;
+export const THROTTLE_DELAY = 1000;
 
 export const SIZE_PAGINATION_API = 28;
 

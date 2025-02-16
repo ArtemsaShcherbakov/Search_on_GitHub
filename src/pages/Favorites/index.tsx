@@ -6,6 +6,7 @@ import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesA
 import ListRepositories from '../../components/ListRepositories';
 import { NavigateButton } from '../../components/UI/Buttons';
 import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
+import { SortOptionType, EventSelectType } from '../../types';
 
 const Favorites: FC = observer(() => {
   const { favorites, sortRepositories } = FavoritesRepositoriesStore;
@@ -14,6 +15,12 @@ const Favorites: FC = observer(() => {
   const countOfFavoritsRepositories = favorites.length;
 
   const handleToBackPage = () => navigate(-1);
+
+  const handleSelectForSort = (event: EventSelectType) => {
+    const value = event.target.value as SortOptionType;
+
+    sortRepositories(value);
+  };
 
   return (
     <Layout>
@@ -24,7 +31,7 @@ const Favorites: FC = observer(() => {
       />
       <SortRepositoriesAndSearchResults
         resultText={`Favorites: ${countOfFavoritsRepositories}`}
-        sortRepositories={sortRepositories}
+        sortRepositories={handleSelectForSort}
       />
       <ListRepositories repositories={favorites} />
     </Layout>

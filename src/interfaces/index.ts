@@ -33,3 +33,8 @@ export interface IParamsForGetRepository {
   repo: string | undefined;
   [key: string]: string | undefined;
 }
+
+export interface IError {
+  isError: boolean;
+  errorMessage: string;
+}

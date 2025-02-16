@@ -1,17 +1,26 @@
-type TimerType = number | null;
+type TimerType = ReturnType<typeof setTimeout> | null;
 
 const throttle = <T extends (...args: any[]) => void>(
   fn: T,
   delay: number,
 ): T => {
+  let lastCall = 0;
   let timer: TimerType = null;
 
-  return ((...args: any[]) => {
-    if (timer) return;
-    timer = window.setTimeout(() => {
+  return ((...args: Parameters<T>) => {
+    const now = Date.now();
+    const remainingTime = delay - (now - lastCall);
+
+    if (remainingTime <= 0) {
+      lastCall = now;
       fn(...args);
-      timer = null;
-    }, delay);
+    } else {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        lastCall = Date.now();
+        fn(...args);
+      }, remainingTime);
+    }
   }) as T;
 };
 
