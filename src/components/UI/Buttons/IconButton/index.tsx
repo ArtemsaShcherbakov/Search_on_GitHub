@@ -3,9 +3,7 @@ import Button from '../Button';
 import IButtonProps from '../interface';
 import './style.css';
 
-interface IIconButton extends Omit<IButtonProps, 'textButton'> {}
-
-const IconButton: FC<PropsWithChildren<IIconButton>> = ({
+const IconButton: FC<PropsWithChildren<Omit<IButtonProps, 'textButton'>>> = ({
   type,
   nameButton,
   modifyViaClassNameButton,

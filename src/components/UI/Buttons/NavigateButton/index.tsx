@@ -4,9 +4,7 @@ import { ICONS } from '../../../../constants';
 import IButtonProps from '../interface';
 import './style.css';
 
-interface INavigateButtonProps extends IButtonProps {}
-
-const NavigateButton: FC<PropsWithChildren<INavigateButtonProps>> = ({
+const NavigateButton: FC<PropsWithChildren<IButtonProps>> = ({
   type,
   nameButton,
   textButton,

@@ -25,7 +25,9 @@ const Input: FC<IInputProps> = ({
     if (event.key === 'Enter') {
       event.preventDefault();
 
-      onSubmit && onSubmit();
+      if (onSubmit) {
+        onSubmit();
+      }
     }
   };
 
