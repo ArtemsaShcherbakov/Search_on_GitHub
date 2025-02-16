@@ -1,6 +1,6 @@
 type TimerType = ReturnType<typeof setTimeout> | null;
 
-const throttle = <T extends (...args: any[]) => void>(
+const throttle = <T extends (...args: Parameters<T>) => void>(
   fn: T,
   delay: number,
 ): T => {

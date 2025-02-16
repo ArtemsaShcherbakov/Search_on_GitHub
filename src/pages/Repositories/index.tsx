@@ -84,6 +84,12 @@ const Repositories: FC = observer(() => {
     [throttledSearchRepository],
   );
 
+  const handleSearchSubmit = () => {
+    if (notEmptyString(search)) {
+      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
+    }
+  };
+
   const handleSelectForSort = (event: EventSelectType) => {
     const value = event.target.value as SortOptionType;
 
@@ -111,6 +117,7 @@ const Repositories: FC = observer(() => {
         name="search"
         onChange={handleInputSearch}
         modifyViaClassName="search-input"
+        onSubmit={handleSearchSubmit}
       />
       <SortRepositoriesAndSearchResults
         resultText={`Result: ${totalCount} repositories`}

@@ -51,6 +51,9 @@ class RepositoriesStore {
       runInAction(() => {
         this.isLoading = false;
         this.error.isError = true;
+        this.repositories = [];
+        this.totalCount = 0;
+        this.originalRepositories = [];
 
         const axiosError = error as AxiosError<{ error_message: string }>;
         this.error.errorMessage = axiosError.message || ERRORS_API.unknownError;
@@ -76,6 +79,7 @@ class RepositoriesStore {
       runInAction(() => {
         this.isLoading = false;
         this.error.isError = true;
+        this.currentRepository = null;
 
         const axiosError = error as AxiosError<{ error_message: string }>;
         this.error.errorMessage = axiosError.message || ERRORS_API.unknownError;
