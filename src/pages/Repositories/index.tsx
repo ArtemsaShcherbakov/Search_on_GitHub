@@ -22,8 +22,13 @@ const ListRepositories = lazy(
 );
 
 const Repositories: FC = observer(() => {
-  const { repositories, totalCount, isLoading, searchRepositories } =
-    RepositoriesStore;
+  const {
+    repositories,
+    totalCount,
+    isLoading,
+    searchRepositories,
+    sortRepositories,
+  } = RepositoriesStore;
 
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(INIT_SATATE_PAGE);
@@ -79,6 +84,7 @@ const Repositories: FC = observer(() => {
       />
       <SortRepositoriesAndSearchResults
         resultText={`Result: ${totalCount} repositories`}
+        sortRepositories={sortRepositories}
       />
       {isLoading && <Loader />}
       {isShowListRepositories && (

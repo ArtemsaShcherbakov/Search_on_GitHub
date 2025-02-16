@@ -1,18 +1,22 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { AxiosError } from 'axios';
 import { getFoundRepositories, getOneRepository } from '../services';
+import getSortRepositories from '../shared/helpers/get-sort-repositories';
 import { ERRORS_API } from '../constants';
 import { IRepository, IParamsForGetRepository } from '../interfaces';
+import { SortOptionType } from '../types';
 
 class RepositoriesStore {
   repositories: IRepository[] = [];
   currentRepository: IRepository | null = null;
+  originalRepositories: IRepository[] = [];
   totalCount: number = 0;
   isLoading: boolean = false;
   errorMessage: string = '';
 
   constructor() {
     makeAutoObservable(this);
+    this.originalRepositories = [...this.originalRepositories];
   }
 
   searchRepositories = async (
@@ -66,6 +70,14 @@ class RepositoriesStore {
 
       console.error(error);
     }
+  };
+
+  sortRepositories = (optionSort: SortOptionType) => {
+    this.repositories = getSortRepositories(
+      this.repositories,
+      this.originalRepositories,
+      optionSort,
+    );
   };
 }
 

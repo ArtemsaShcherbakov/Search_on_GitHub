@@ -8,6 +8,12 @@ export enum ERRORS_API {
   unknownError = 'An unknown error occurred',
 }
 
+export const OPTIONS_FOR_SORTING_REPOSITORIES = [
+  { value: 'none', textOption: 'None' },
+  { value: 'stars', textOption: 'Sort by stars' },
+  { value: 'alphabetical', textOption: 'Alphabetical sorting' },
+];
+
 export const THROTTLE_DELAY = 800;
 
 export const SIZE_PAGINATION_API = 28;
