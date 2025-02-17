@@ -1,4 +1,5 @@
 export enum ROUTES_LIST {
+  root = '/',
   repositories = '/repositories',
   favorites = '/favorites',
   repository = '/repositories/:owner/:repo',
