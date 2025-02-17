@@ -16,11 +16,16 @@ class RepositoriesStore {
     isError: false,
     errorMessage: '',
   };
+  searchQuery: string = '';
 
   constructor() {
     makeAutoObservable(this);
     this.originalRepositories = [...this.originalRepositories];
   }
+
+  setSearchQuery = (query: string) => {
+    this.searchQuery = query;
+  };
 
   searchRepositories = async (
     search: string,
@@ -29,7 +34,9 @@ class RepositoriesStore {
     optionSort: SortOptionType,
   ) => {
     try {
-      this.isLoading = true;
+      runInAction(() => {
+        this.isLoading = true;
+      });
 
       const foundRepositoryData = await getFoundRepositories(
         search,
@@ -65,7 +72,9 @@ class RepositoriesStore {
     params: IParamsForGetRepository,
   ) => {
     try {
-      this.isLoading = true;
+      runInAction(() => {
+        this.isLoading = true;
+      });
 
       const foundRepository = await getOneRepository(params);
 

@@ -3,11 +3,11 @@ import { IPictureOrIcon } from '../../../interfaces';
 import './style.css';
 
 interface IAvatarProps extends IPictureOrIcon {
-  modifyViaClassNameBage?: string;
+  modifyViaClassNameAvatar?: string;
 }
 
-const Avatar: FC<IAvatarProps> = ({ path, alt, modifyViaClassNameBage }) => (
-  <img src={path} alt={alt} className={`avatar ${modifyViaClassNameBage}`} />
+const Avatar: FC<IAvatarProps> = ({ path, alt, modifyViaClassNameAvatar }) => (
+  <img src={path} alt={alt} className={`avatar ${modifyViaClassNameAvatar}`} />
 );
 
 export default Avatar;

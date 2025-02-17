@@ -1,11 +1,11 @@
 import { FC, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import { IconButton } from '../UI/Buttons';
-import Bage from '../UI/Bage';
-import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
-import { ICONS } from '../../constants';
-import { ROUTES_LIST } from '../../constants';
+import { IconButton, Button } from '../../UI/Buttons';
+import Bage from '../../UI/Bage';
+import Avatar from '../../UI/Avatar';
+import FavoritesRepositoriesStore from '../../../stores/FavoritesRepositoriesStore';
+import { ICONS, ROUTES_LIST } from '../../../constants';
 import './style.css';
 
 const Header: FC = observer(() => {
@@ -25,17 +25,18 @@ const Header: FC = observer(() => {
   return (
     <header className="header" role="banner">
       <div className="header-container">
-        <div
-          className="header-container-logo"
-          onClick={handleNavigateToRepositories}
+        <Button
+          type="button"
+          modifyViaClassNameButton="header-container-logo"
+          handleOnClick={handleNavigateToRepositories}
+          textButton="GitHubSearch"
         >
           <img
             className="header-container-logo__icon"
             src={ICONS.magnifier.path}
             alt={ICONS.magnifier.alt}
           />
-          <h1 className="header-container-logo__text">GitHubSearch</h1>
-        </div>
+        </Button>
         <div className="header-container-profile">
           <IconButton
             type="button"
@@ -50,9 +51,9 @@ const Header: FC = observer(() => {
               />
             </Bage>
           </IconButton>
-          <img
-            className="header-container-profile__icon-avatar"
-            src={ICONS.avatar.path}
+          <Avatar
+            modifyViaClassNameAvatar="avatar--small header-container-profile__icon-avatar"
+            path={ICONS.avatar.path}
             alt={ICONS.avatar.alt}
           />
         </div>
