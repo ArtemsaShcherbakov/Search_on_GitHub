@@ -5,7 +5,7 @@ import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
 import Loader from '../../components/UI/Loader';
 import { NavigateButton } from '../../components/UI/Buttons';
-import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
+import favoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
 import { SortOptionType, EventSelectType } from '../../types';
 
 const ListRepositories = lazy(
@@ -13,7 +13,7 @@ const ListRepositories = lazy(
 );
 
 const Favorites: FC = observer(() => {
-  const { favorites, sortRepositories } = FavoritesRepositoriesStore;
+  const { favorites, sortRepositories } = favoritesRepositoriesStore;
   const navigate = useNavigate();
 
   const countOfFavoritsRepositories = favorites.length;

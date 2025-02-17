@@ -6,7 +6,11 @@ import FooterCard from '../FooterCard';
 import Card from '../UI/Card';
 import { Button } from '../UI/Buttons';
 import getCroppedText from '../../shared/utils/get-cropped-text';
-import { FULL_NAME_MAX_LENGTH, LOGIN_MAX_LENGTH } from './constants';
+import {
+  FULL_NAME_MAX_LENGTH,
+  LOGIN_MAX_LENGTH,
+  START_POSITION_CROPPED_TEXT,
+} from './constants';
 import { IRepository } from '../../interfaces';
 import './style.css';
 
@@ -18,11 +22,16 @@ const RepositoryCard: FC<IRepositoryCardProps> = ({ repository }) => {
   const navigate = useNavigate();
 
   const login =
-    '@' + getCroppedText(repository.owner.login, 0, LOGIN_MAX_LENGTH);
+    '@' +
+    getCroppedText(
+      repository.owner.login,
+      START_POSITION_CROPPED_TEXT,
+      LOGIN_MAX_LENGTH,
+    );
 
   const fullName = getCroppedText(
     repository.full_name,
-    0,
+    START_POSITION_CROPPED_TEXT,
     FULL_NAME_MAX_LENGTH,
   );
 

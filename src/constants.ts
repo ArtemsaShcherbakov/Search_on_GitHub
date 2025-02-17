@@ -11,11 +11,20 @@ export enum ERRORS_API {
   unknownError = 'An unknown error occurred',
 }
 
+export enum ERROR_VALIDATION {
+  fieldVoid = 'Field cannot be empty',
+}
+
 export const OPTIONS_FOR_SORTING_REPOSITORIES = [
   { value: 'none', textOption: 'None' },
   { value: 'stars', textOption: 'Sort by stars' },
   { value: 'alphabetical', textOption: 'Alphabetical sorting' },
 ];
+
+export const INIT_STATE_ERROR_VALIDATION = {
+  isError: false,
+  errorMessage: '',
+};
 
 export const THROTTLE_DELAY = 1000;
 
