@@ -24,7 +24,7 @@
 .error-text {
   margin-top: 10px;
   position: absolute;
-  left: 100px;
+  margin-left: 20px;
   color: #d93232;
 }
 
