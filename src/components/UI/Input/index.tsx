@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { EventInputType, InputKeyboardEventType } from '../../../types';
+import {
+  EventInputType,
+  InputKeyboardEventType,
+  InputRefType,
+} from '../../../types';
 import './style.css';
 
 interface IInputProps {
@@ -10,6 +14,9 @@ interface IInputProps {
   modifyViaClassName?: string;
   onChange: (event: EventInputType) => void;
   onSubmit?: () => void;
+  ref?: InputRefType;
+  errorText?: string;
+  error?: boolean;
 }
 
 const Input: FC<IInputProps> = ({
@@ -20,7 +27,14 @@ const Input: FC<IInputProps> = ({
   onChange,
   onSubmit,
   modifyViaClassName,
+  ref,
+  errorText,
+  error,
 }) => {
+  const className = error
+    ? `standart-input standart-input--error ${modifyViaClassName}`
+    : `standart-input ${modifyViaClassName}`;
+
   const handleKeyDown = (event: InputKeyboardEventType) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -32,15 +46,19 @@ const Input: FC<IInputProps> = ({
   };
 
   return (
-    <input
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      onKeyDown={handleKeyDown}
-      className={`standart-input ${modifyViaClassName}`}
-    />
+    <>
+      <input
+        ref={ref}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onKeyDown={handleKeyDown}
+        className={className}
+      />
+      {error && <p className="error-text">{errorText}</p>}
+    </>
   );
 };
 
