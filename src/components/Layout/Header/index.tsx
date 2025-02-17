@@ -15,11 +15,11 @@ const Header: FC = observer(() => {
   const favoritesLength = favorites.length;
 
   const handleNavigateToRepositories = useCallback(() => {
-    navigate(ROUTES_LIST.repositories);
+    navigate(`/${ROUTES_LIST.repositories}`);
   }, [navigate]);
 
   const handleNavigateToFavorits = useCallback(() => {
-    navigate(ROUTES_LIST.favorites);
+    navigate(`/${ROUTES_LIST.favorites}`);
   }, [navigate]);
 
   return (
