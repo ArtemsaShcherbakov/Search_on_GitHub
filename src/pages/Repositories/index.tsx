@@ -95,11 +95,11 @@ const Repositories: FC = observer(() => {
 
   useEffect(() => {
     sendData();
-  }, [page, searchQuery]);
+  }, [page, searchQuery, sendData]);
 
   useEffect(() => {
     sortRepositories(optionSort);
-  }, [optionSort]);
+  }, [optionSort, sortRepositories]);
 
   const handleInputSearch = useCallback(
     (event: EventInputType) => {

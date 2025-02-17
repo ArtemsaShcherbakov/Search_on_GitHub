@@ -11,20 +11,20 @@ const useInputFocus = (): IUseInputFocusReturn => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleFocus = () => setIsFocused(true);
-    const handleBlur = () => setIsFocused(false);
+    const inputElement = inputRef.current;
 
-    if (inputRef.current) {
-      inputRef.current.addEventListener('focus', handleFocus);
-      inputRef.current.addEventListener('blur', handleBlur);
+    if (inputElement) {
+      const handleFocus = () => setIsFocused(true);
+      const handleBlur = () => setIsFocused(false);
+
+      inputElement.addEventListener('focus', handleFocus);
+      inputElement.addEventListener('blur', handleBlur);
+
+      return () => {
+        inputElement.removeEventListener('focus', handleFocus);
+        inputElement.removeEventListener('blur', handleBlur);
+      };
     }
-
-    return () => {
-      if (inputRef.current) {
-        inputRef.current.removeEventListener('focus', handleFocus);
-        inputRef.current.removeEventListener('blur', handleBlur);
-      }
-    };
   }, []);
 
   return { inputRef, isFocused };

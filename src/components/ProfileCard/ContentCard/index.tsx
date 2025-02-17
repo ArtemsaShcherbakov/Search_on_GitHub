@@ -21,7 +21,9 @@ const ContentCard: FC<IContentCardProps> = ({ repository }) => {
       <div className="card-repo-header">
         <Avatar path={pathAvatar} alt="User Avatar" />
         <div className="card-repo-header-text">
-          <p className="card-repo-header-text__tite">{repository?.full_name}</p>
+          <p className="card-repo-header-text__title">
+            {repository?.full_name}
+          </p>
           <p className="card-repo-header-text__description">
             {repository?.description}
           </p>

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import Layout from '../../components/Layout';
 import { NavigateButton } from '../../components/UI/Buttons';
 import Loader from '../../components/UI/Loader';
-import RepositoriesStore from '../../stores/RepositoriesStore';
+import repositoriesStore from '../../stores/RepositoriesStore';
 import { IParamsForGetRepository } from '../../interfaces';
 
 const ProfileCard = lazy(() => import('../../components/ProfileCard'));
@@ -13,7 +13,7 @@ const ProfileRepository: FC = observer(() => {
   const { owner, repo } = useParams<IParamsForGetRepository>();
 
   const { currentRepository, getRepositoryByNameOwnerAndRepository } =
-    RepositoriesStore;
+    repositoriesStore;
 
   const navigate = useNavigate();
 
