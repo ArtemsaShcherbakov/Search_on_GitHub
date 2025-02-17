@@ -3,8 +3,8 @@
   height: 48px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: none;
   border-radius: 12px;
+  border: 1px solid #ccc;
   background: #ffffff;
 
   font-weight: 400;
@@ -12,6 +12,23 @@
   line-height: 16px;
 }
 
-input::placeholder {
+.standart-input::placeholder {
   color: #3a3a3a52;
+}
+
+.standart-input:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.error-text {
+  margin-top: 10px;
+  position: absolute;
+  left: 100px;
+  color: #d93232;
+}
+
+.standart-input--error:focus {
+  border: 1px solid #d93232;
+  background: #ffffff;
 }

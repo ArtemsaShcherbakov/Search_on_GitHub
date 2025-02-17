@@ -13,6 +13,7 @@ import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesA
 import Input from '../../components/UI/Input';
 import Pagination from '../../components/UI/Pagination';
 import Loader from '../../components/UI/Loader';
+import useInputFocus from '../../hooks/useInputFocus';
 import repositoriesStore from '../../stores/RepositoriesStore';
 import throttle from '../../shared/utils/throttle';
 import notEmptyString from '../../shared/utils/not-empty-string';
@@ -21,8 +22,11 @@ import {
   SIZE_PAGINATION_API,
   PAGE_SWITCH_STEP,
   INIT_STATE_PAGE,
+  ERROR_VALIDATION,
+  INIT_STATE_ERROR_VALIDATION,
 } from '../../constants';
 import { EventInputType, EventSelectType, SortOptionType } from '../../types';
+import { IError } from '../../interfaces';
 import './style.css';
 
 const ListRepositories = lazy(
@@ -43,20 +47,33 @@ const Repositories: FC = observer(() => {
 
   const [page, setPage] = useState<number>(INIT_STATE_PAGE);
   const [optionSort, setOptionSort] = useState<SortOptionType>('none');
+  const [errorValidation, setErrorValidation] = useState<IError>(
+    INIT_STATE_ERROR_VALIDATION,
+  );
 
-  const countOfPages: number = totalCount
-    ? Math.ceil(totalCount / SIZE_PAGINATION_API)
-    : 0;
+  const { inputRef, isFocused } = useInputFocus();
+
+  const countOfPages = useMemo(
+    () => (totalCount ? Math.ceil(totalCount / SIZE_PAGINATION_API) : 0),
+    [totalCount],
+  );
+
   const isShowPagination: boolean = countOfPages > 1 && !error.isError;
+
   const isShowListRepositories: boolean =
     totalCount > 0 && !isLoading && !error.isError;
+
+  const isShowError = isFocused && errorValidation.isError;
+
+  const errorText =
+    isFocused && errorValidation.isError ? errorValidation.errorMessage : '';
 
   const throttledSearchRepository = useMemo(
     () => throttle(searchRepositories, THROTTLE_DELAY),
     [searchRepositories],
   );
 
-  useEffect(() => {
+  const sendData = useCallback(() => {
     if (notEmptyString(searchQuery)) {
       throttledSearchRepository(
         searchQuery,
@@ -64,7 +81,20 @@ const Repositories: FC = observer(() => {
         SIZE_PAGINATION_API,
         optionSort,
       );
+
+      setErrorValidation({ isError: false, errorMessage: '' });
+
+      return;
     }
+
+    setErrorValidation({
+      isError: true,
+      errorMessage: ERROR_VALIDATION.fieldVoid,
+    });
+  }, [searchQuery, page, optionSort, throttledSearchRepository]);
+
+  useEffect(() => {
+    sendData();
   }, [page, searchQuery]);
 
   useEffect(() => {
@@ -77,26 +107,19 @@ const Repositories: FC = observer(() => {
 
       setPage(INIT_STATE_PAGE);
       setSearchQuery(valueInput);
+      setErrorValidation({ isError: false, errorMessage: '' });
     },
     [setSearchQuery],
   );
 
   const handleSearchSubmit = () => {
-    if (notEmptyString(searchQuery)) {
-      throttledSearchRepository(
-        searchQuery,
-        page,
-        SIZE_PAGINATION_API,
-        optionSort,
-      );
-    }
+    sendData();
   };
 
   const handleSelectForSort = (event: EventSelectType) => {
     const value = event.target.value as SortOptionType;
 
     setOptionSort(value);
-
     sortRepositories(value);
   };
 
@@ -113,13 +136,16 @@ const Repositories: FC = observer(() => {
   return (
     <Layout>
       <Input
+        ref={inputRef}
         type="text"
         value={searchQuery}
         placeholder="Search"
         name="search"
-        onChange={handleInputSearch}
         modifyViaClassName="search-input"
+        onChange={handleInputSearch}
         onSubmit={handleSearchSubmit}
+        error={isShowError}
+        errorText={errorText}
       />
       <SortRepositoriesAndSearchResults
         resultText={`Result: ${totalCount} repositories`}
