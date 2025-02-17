@@ -13,14 +13,14 @@ import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesA
 import Input from '../../components/UI/Input';
 import Pagination from '../../components/UI/Pagination';
 import Loader from '../../components/UI/Loader';
-import RepositoriesStore from '../../stores/RepositoriesStore';
+import repositoriesStore from '../../stores/RepositoriesStore';
 import throttle from '../../shared/utils/throttle';
 import notEmptyString from '../../shared/utils/not-empty-string';
 import {
   THROTTLE_DELAY,
   SIZE_PAGINATION_API,
   PAGE_SWITCH_STEP,
-  INIT_SATATE_PAGE,
+  INIT_STATE_PAGE,
 } from '../../constants';
 import { EventInputType, EventSelectType, SortOptionType } from '../../types';
 import './style.css';
@@ -35,12 +35,13 @@ const Repositories: FC = observer(() => {
     totalCount,
     isLoading,
     error,
+    searchQuery,
+    setSearchQuery,
     searchRepositories,
     sortRepositories,
-  } = RepositoriesStore;
+  } = repositoriesStore;
 
-  const [search, setSearch] = useState<string>('');
-  const [page, setPage] = useState<number>(INIT_SATATE_PAGE);
+  const [page, setPage] = useState<number>(INIT_STATE_PAGE);
   const [optionSort, setOptionSort] = useState<SortOptionType>('none');
 
   const countOfPages: number = totalCount
@@ -52,14 +53,19 @@ const Repositories: FC = observer(() => {
 
   const throttledSearchRepository = useMemo(
     () => throttle(searchRepositories, THROTTLE_DELAY),
-    [],
+    [searchRepositories],
   );
 
   useEffect(() => {
-    if (notEmptyString(search)) {
-      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
+    if (notEmptyString(searchQuery)) {
+      throttledSearchRepository(
+        searchQuery,
+        page,
+        SIZE_PAGINATION_API,
+        optionSort,
+      );
     }
-  }, [page, search]);
+  }, [page, searchQuery]);
 
   useEffect(() => {
     sortRepositories(optionSort);
@@ -69,24 +75,20 @@ const Repositories: FC = observer(() => {
     (event: EventInputType) => {
       const valueInput = event.target.value;
 
-      setSearch(valueInput);
-      setPage(INIT_SATATE_PAGE);
-
-      if (notEmptyString(valueInput)) {
-        throttledSearchRepository(
-          valueInput,
-          INIT_SATATE_PAGE,
-          SIZE_PAGINATION_API,
-          optionSort,
-        );
-      }
+      setPage(INIT_STATE_PAGE);
+      setSearchQuery(valueInput);
     },
-    [throttledSearchRepository],
+    [setSearchQuery],
   );
 
   const handleSearchSubmit = () => {
-    if (notEmptyString(search)) {
-      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
+    if (notEmptyString(searchQuery)) {
+      throttledSearchRepository(
+        searchQuery,
+        page,
+        SIZE_PAGINATION_API,
+        optionSort,
+      );
     }
   };
 
@@ -104,7 +106,7 @@ const Repositories: FC = observer(() => {
   );
 
   const handlePrevPage = useCallback(
-    () => setPage(prev => Math.max(prev - PAGE_SWITCH_STEP, INIT_SATATE_PAGE)),
+    () => setPage(prev => Math.max(prev - PAGE_SWITCH_STEP, INIT_STATE_PAGE)),
     [],
   );
 
@@ -112,7 +114,7 @@ const Repositories: FC = observer(() => {
     <Layout>
       <Input
         type="text"
-        value={search}
+        value={searchQuery}
         placeholder="Search"
         name="search"
         onChange={handleInputSearch}

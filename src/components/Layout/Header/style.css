@@ -20,15 +20,16 @@
   display: flex;
   align-items: center;
   gap: 11px;
-  cursor: pointer;
-}
+  flex-direction: row-reverse;
+  background: #3a3a3a;
 
-.header-container-logo__text {
-  margin: 0;
   font-weight: 700;
   font-size: 14px;
   line-height: 18.2px;
-  color: #ffffff;
+}
+
+.header-container-logo:hover {
+  background: #3a3a3a;
 }
 
 .header-container-logo__icon {
@@ -57,8 +58,7 @@
 .header-container-profile__icon-avatar {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  padding: 4px;
+  border-radius: 0px;
 }
 
 @media (max-width: 1200px) {

@@ -16,7 +16,7 @@ const HeaderCard: React.FC<HeaderCardProps> = ({
 }) => (
   <header className="header-card">
     <Avatar
-      modifyViaClassNameBage="avatar--small"
+      modifyViaClassNameAvatar="avatar--small"
       path={avatarRepositoryPath}
       alt={AVATAR_REPOSITORY_ALT}
     />
