@@ -1,4 +1,4 @@
-import { FC, useEffect, Suspense, lazy } from 'react';
+import { FC, useEffect, Suspense, lazy, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import Layout from '../../components/Layout';
@@ -19,9 +19,9 @@ const ProfileRepository: FC = observer(() => {
 
   useEffect(() => {
     getRepositoryByNameOwnerAndRepository({ owner, repo });
-  }, []);
+  }, [owner, repo, getRepositoryByNameOwnerAndRepository]);
 
-  const handleToBackPage = () => navigate(-1);
+  const handleToBackPage = useCallback(() => navigate(-1), [navigate]);
 
   return (
     <Layout>

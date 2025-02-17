@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderCard from './HeaderCard';
 import ContentCard from './ContentCard';

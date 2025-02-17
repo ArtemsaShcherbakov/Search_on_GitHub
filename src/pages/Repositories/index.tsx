@@ -35,11 +35,12 @@ const Repositories: FC = observer(() => {
     totalCount,
     isLoading,
     error,
+    searchQuery,
+    setSearchQuery,
     searchRepositories,
     sortRepositories,
   } = repositoriesStore;
 
-  const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(INIT_STATE_PAGE);
   const [optionSort, setOptionSort] = useState<SortOptionType>('none');
 
@@ -52,14 +53,19 @@ const Repositories: FC = observer(() => {
 
   const throttledSearchRepository = useMemo(
     () => throttle(searchRepositories, THROTTLE_DELAY),
-    [],
+    [searchRepositories],
   );
 
   useEffect(() => {
-    if (notEmptyString(search)) {
-      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
+    if (notEmptyString(searchQuery)) {
+      throttledSearchRepository(
+        searchQuery,
+        page,
+        SIZE_PAGINATION_API,
+        optionSort,
+      );
     }
-  }, [page, search]);
+  }, [page, searchQuery]);
 
   useEffect(() => {
     sortRepositories(optionSort);
@@ -69,24 +75,20 @@ const Repositories: FC = observer(() => {
     (event: EventInputType) => {
       const valueInput = event.target.value;
 
-      setSearch(valueInput);
       setPage(INIT_STATE_PAGE);
-
-      if (notEmptyString(valueInput)) {
-        throttledSearchRepository(
-          valueInput,
-          INIT_STATE_PAGE,
-          SIZE_PAGINATION_API,
-          optionSort,
-        );
-      }
+      setSearchQuery(valueInput);
     },
-    [throttledSearchRepository],
+    [setSearchQuery],
   );
 
   const handleSearchSubmit = () => {
-    if (notEmptyString(search)) {
-      throttledSearchRepository(search, page, SIZE_PAGINATION_API, optionSort);
+    if (notEmptyString(searchQuery)) {
+      throttledSearchRepository(
+        searchQuery,
+        page,
+        SIZE_PAGINATION_API,
+        optionSort,
+      );
     }
   };
 
@@ -112,7 +114,7 @@ const Repositories: FC = observer(() => {
     <Layout>
       <Input
         type="text"
-        value={search}
+        value={searchQuery}
         placeholder="Search"
         name="search"
         onChange={handleInputSearch}

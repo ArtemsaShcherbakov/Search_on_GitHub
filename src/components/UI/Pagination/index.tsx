@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Button } from '../Buttons';
 import { INIT_STATE_PAGE } from '../../../constants';
 import './style.css';
@@ -43,4 +43,4 @@ const Pagination: FC<IPaginationProps> = ({
   </nav>
 );
 
-export default Pagination;
+export default memo(Pagination);

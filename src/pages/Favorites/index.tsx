@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense } from 'react';
+import { FC, lazy, Suspense, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout';
@@ -18,13 +18,16 @@ const Favorites: FC = observer(() => {
 
   const countOfFavoritsRepositories = favorites.length;
 
-  const handleToBackPage = () => navigate(-1);
+  const handleToBackPage = useCallback(() => navigate(-1), [navigate]);
 
-  const handleSelectForSort = (event: EventSelectType) => {
-    const value = event.target.value as SortOptionType;
+  const handleSelectForSort = useCallback(
+    (event: EventSelectType) => {
+      const value = event.target.value as SortOptionType;
 
-    sortRepositories(value);
-  };
+      sortRepositories(value);
+    },
+    [sortRepositories],
+  );
 
   return (
     <Layout>
