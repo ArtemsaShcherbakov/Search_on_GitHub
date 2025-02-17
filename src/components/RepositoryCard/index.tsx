@@ -8,6 +8,7 @@ import { Button } from '../UI/Buttons';
 import getCroppedText from '../../shared/utils/get-cropped-text';
 import { FULL_NAME_MAX_LENGTH, LOGIN_MAX_LENGTH } from './constants';
 import { IRepository } from '../../interfaces';
+import './style.css';
 
 interface IRepositoryCardProps {
   repository: IRepository;
@@ -30,7 +31,7 @@ const RepositoryCard: FC<IRepositoryCardProps> = ({ repository }) => {
   }, [navigate, repository.owner.login, repository.name]);
 
   return (
-    <Card>
+    <Card modifyViaClassName="modify-card-repository">
       <HeaderCard
         avatarRepositoryPath={repository.owner.avatar_url}
         numberOfForks={repository.forks}

@@ -20,7 +20,7 @@ export const SIZE_PAGINATION_API = 28;
 
 export const PAGE_SWITCH_STEP = 1;
 
-export const INIT_SATATE_PAGE = 1;
+export const INIT_STATE_PAGE = 1;
 
 const BASE_PATH = '/Search_on_GitHub';
 

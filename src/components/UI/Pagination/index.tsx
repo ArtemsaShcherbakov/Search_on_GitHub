@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Button } from '../Buttons';
+import { INIT_STATE_PAGE } from '../../../constants';
 import './style.css';
 
 interface IPaginationProps {
@@ -22,6 +23,7 @@ const Pagination: FC<IPaginationProps> = ({
           type="button"
           textButton="&laquo;"
           handleOnClick={hanldePrevData}
+          disabled={currentPage === INIT_STATE_PAGE}
         />
       </li>
       <li>
@@ -34,6 +36,7 @@ const Pagination: FC<IPaginationProps> = ({
           type="button"
           textButton="&raquo;"
           handleOnClick={hanldeNextData}
+          disabled={currentPage === countOfPages}
         />
       </li>
     </ul>

@@ -1,11 +1,10 @@
 import { FC, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import { IconButton } from '../UI/Buttons';
-import Bage from '../UI/Bage';
-import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
-import { ICONS } from '../../constants';
-import { ROUTES_LIST } from '../../constants';
+import { IconButton } from '../../UI/Buttons';
+import Bage from '../../UI/Bage';
+import FavoritesRepositoriesStore from '../../../stores/FavoritesRepositoriesStore';
+import { ICONS, ROUTES_LIST } from '../../../constants';
 import './style.css';
 
 const Header: FC = observer(() => {

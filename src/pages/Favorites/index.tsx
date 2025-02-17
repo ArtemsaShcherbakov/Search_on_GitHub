@@ -1,12 +1,16 @@
-import { FC } from 'react';
+import { FC, lazy, Suspense } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import SortRepositoriesAndSearchResults from '../../components/SortRepositoriesAndSearchResults';
-import ListRepositories from '../../components/ListRepositories';
+import Loader from '../../components/UI/Loader';
 import { NavigateButton } from '../../components/UI/Buttons';
 import FavoritesRepositoriesStore from '../../stores/FavoritesRepositoriesStore';
 import { SortOptionType, EventSelectType } from '../../types';
+
+const ListRepositories = lazy(
+  () => import('../../components/ListRepositories'),
+);
 
 const Favorites: FC = observer(() => {
   const { favorites, sortRepositories } = FavoritesRepositoriesStore;
@@ -33,7 +37,9 @@ const Favorites: FC = observer(() => {
         resultText={`Favorites: ${countOfFavoritsRepositories}`}
         sortRepositories={handleSelectForSort}
       />
-      <ListRepositories repositories={favorites} />
+      <Suspense fallback={<Loader />}>
+        <ListRepositories repositories={favorites} />
+      </Suspense>
     </Layout>
   );
 });
